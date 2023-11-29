@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns=http://www.w3.org/1999/xhtml xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" th:href="@{img/logo.jpg}" type="image/x-icon"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Cake - Bakery</title>
+
+    <!-- Icon css link -->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendors/linearicons/style.css}" rel="stylesheet">
+    <link th:href="@{/vendors/flat-icon/flaticon.css}" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Rev slider css -->
+    <link th:href="@{vendors/revolution/css/settings.css}" rel="stylesheet">
+    <link th:href="@{vendors/revolution/css/layers.css}" rel="stylesheet">
+    <link th:href="@{vendors/revolution/css/navigation.css}" rel="stylesheet">
+    <link th:href="@{vendors/animate-css/animate.css}" rel="stylesheet">
+
+    <!-- Extra plugin css -->
+    <link th:href="@{vendors/owl-carousel/owl.carousel.min.css}" rel="stylesheet">
+    <link th:href="@{vendors/magnifc-popup/magnific-popup.css}" rel="stylesheet">
+
+    <link th:href="@{css/style.css}" rel="stylesheet">
+    <link th:href="@{css/responsive.css}" rel="stylesheet">
+</head>
+<body>
+<!--================Main Header Area =================-->
+<header class="main_header_area">
+    <div class="top_header_area row m0">
+        <div class="container">
+            <div class="float-left">
+            </div>
+            <div class="float-right">
+                <ul class="h_social list_style">
+                </ul>
+                <ul class="h_search list_style">
+                    <li class="shop_cart">
+                        <a th:href="@{/login}">
+                            <i class="lnr lnr-cart"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown submenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/login}" style="color: #e3209b">Login</a></li>
+                            <li><a th:href="@{/register}" style="color: #e3209b">Register</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main_menu_two">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" th:href="@{/}"><img th:src="@{img/logo-2.png}" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="my_toggle_menu">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav justify-content-end">
+                        <li><a th:href="@{/home}">Home</a></li>
+                        <li><a th:href="@{/}">About Us</a></li>
+                        <li><a th:href="@{/}">Blog</a></li>
+                        <li><a th:href="@{/}">Contact Us</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<!--================End Main Header Area =================-->
+<!--================Slider Area =================-->
+<img th:src="@{img/home-slider/slider-10.jpg}"  alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+<!--================Slider Area =================-->
+<!--================Welcome Area =================-->
+<section class="welcome_bakery_area cake_feature_main p_100">
+    <div class="container">
+        <div class="main_title">
+            <h2>Featured Cakes</h2>
+        </div>
+        <div class="cake_feature_row row" th:each="product : ${session.listProduct}">
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="cake_feature_item">
+                    <a class="cake_img" th:href="@{/product/{id}(id=${product.id})}">
+                        <img th:src="${product.linkImg}" alt="">
+                    </a>
+                    <div class="cake_text">
+                        <h4 class="label_sale" th:text="'$' + ${product.price}"></h4>
+                        <h3 th:text="${product.name}"></h3>
+                        <a class="pest_btn" th:href="@{/login}">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Welcome Area =================-->
+<!--================Footer Area =================-->
+<footer class="footer_area">
+    <div class="footer_widgets">
+        <div class="container">
+            <div class="row footer_wd_inner">
+                <div class="col-lg-3 col-6">
+                    <aside class="f_widget f_about_widget">
+                        <img th:src="@{img/footer-logo.png}" alt="">
+                        <p>Delicious cake</p>
+                        <ul class="nav">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <aside class="f_widget f_link_widget">
+                        <div class="f_title">
+                            <h3>Quick links</h3>
+                        </div>
+                        <ul class="list_style">
+                            <li><a href="#">View Order</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <aside class="f_widget f_link_widget">
+                        <div class="f_title">
+                            <h3>Work Times</h3>
+                        </div>
+                        <ul class="list_style">
+                            <li><a href="#">Mon. :  Fri.: 8 am - 8 pm</a></li>
+                            <li><a href="#">Sat. :  Sun.: 8 am - 10 pm</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <aside class="f_widget f_contact_widget">
+                        <div class="f_title">
+                            <h3>Contact Info</h3>
+                        </div>
+                        <h4>(1800) 574 9687</h4>
+                        <p>Cake Bakery<br />Tran Phu Ha Dong</p>
+                        <h5>cakebakery@contact.co.in</h5>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--================End Footer Area =================-->
+<!--================Search Box Area =================-->
+<div class="search_area zoom-anim-dialog mfp-hide" id="test-search">
+    <div class="search_box_inner">
+        <h3>Search</h3>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
+                    </span>
+        </div>
+    </div>
+</div>
+<!--================End Search Box Area =================-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script th:src="@{js/jquery-3.2.1.min.js}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script th:src="@{js/popper.min.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<!-- Rev slider js -->
+<script th:src="@{vendors/revolution/js/jquery.themepunch.tools.min.js}"></script>
+<script th:src="@{vendors/revolution/js/jquery.themepunch.revolution.min.js}"></script>
+<script th:src="@{vendors/revolution/js/extensions/revolution.extension.actions.min.js}"></script>
+<script th:src="@{vendors/revolution/js/extensions/revolution.extension.video.min.js}"></script>
+<script th:src="@{vendors/revolution/js/extensions/revolution.extension.slideanims.min.js}"></script>
+<script th:src="@{vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js}"></script>
+<script th:src="@{vendors/revolution/js/extensions/revolution.extension.navigation.min.js}"></script>
+<!-- Extra plugin js -->
+<script th:src="@{vendors/owl-carousel/owl.carousel.min.js}"></script>
+<script th:src="@{vendors/magnifc-popup/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{vendors/datetime-picker/js/moment.min.js}"></script>
+<script th:src="@{vendors/datetime-picker/js/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{vendors/nice-select/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{vendors/jquery-ui/jquery-ui.min.js}"></script>
+<script th:src="@{vendors/lightbox/simpleLightbox.min.js}"></script>
+
+<script th:src="@{js/theme.js}"></script>
+</body>
+</html>>
