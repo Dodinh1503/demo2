@@ -16,7 +16,7 @@ public class Product {
     private int id;
     private String name, linkImg, description;
     private float price, discount;
-    private int quantity, amountsold, status,amountleft;
+    private int quantity, amountSold, status,amountLeft;
 
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name="category_Id", referencedColumnName = "id")

@@ -16,7 +16,7 @@ public class Cart {
     private int quantity;
     private float total;
 
-    @OneToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_Id", referencedColumnName = "id")
     private User user;
 

@@ -1,4 +1,4 @@
-package com.project.cake.demo2.controller;
+package com.project.cake.demo2.controller.customer;
 
 import com.project.cake.demo2.model.Product;
 import com.project.cake.demo2.repository.ProductRepository;
@@ -19,19 +19,19 @@ public class ProductController {
         this.productRepository = productRepo;
     }
 
-    @GetMapping("/")
-    public String viewHomePage(Model model, HttpSession session) {
-        List<Product>list=productRepository.findAll();
+    @GetMapping("/customer")
+    private String viewHomePage(HttpSession session) {
+        List<Product> list=productRepository.findAll();
         session.setAttribute("listProduct",list);
         for(Product i: list)
             System.out.println(i.getLinkImg());
-        return "home";
+        return "customer/home";
     }
 
-    @GetMapping("/product/{id}")
-    public String viewDetail(@PathVariable("id") int id, Model model) {
+    @GetMapping("/customer/product/{id}")
+    private String viewDetail(@PathVariable("id") int id, Model model) {
         Optional<Product> product = productRepository.findById(id);
         model.addAttribute("product", product.orElse(null));
-        return "product-detail";
+        return "customer/product-detail";
     }
 }

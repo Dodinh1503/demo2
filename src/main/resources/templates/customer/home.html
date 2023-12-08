@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" th:href="@{/img/fav-icon.png}" type="image/x-icon" />
+    <link rel="icon" th:href="@{/img/logo.jpg}" type="image/x-icon"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Cake - Bakery</title>
 
-    <!-- Icon css link -->
+    <!-- Icon css} link -->
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
     <link th:href="@{/vendors/linearicons/style.css}" rel="stylesheet">
     <link th:href="@{/vendors/flat-icon/flaticon.css}" rel="stylesheet">
@@ -18,13 +17,13 @@
     <!-- Bootstrap -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 
-    <!-- Rev slider css -->
+    <!-- Rev slider css} -->
     <link th:href="@{/vendors/revolution/css/settings.css}" rel="stylesheet">
     <link th:href="@{/vendors/revolution/css/layers.css}" rel="stylesheet">
     <link th:href="@{/vendors/revolution/css/navigation.css}" rel="stylesheet">
     <link th:href="@{/vendors/animate-css/animate.css}" rel="stylesheet">
 
-    <!-- Extra plugin css -->
+    <!-- Extra plugin css} -->
     <link th:href="@{/vendors/owl-carousel/owl.carousel.min.css}" rel="stylesheet">
     <link th:href="@{/vendors/magnifc-popup/magnific-popup.css}" rel="stylesheet">
     <link th:href="@{/vendors/jquery-ui/jquery-ui.min.css}" rel="stylesheet">
@@ -36,29 +35,29 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script th:src="@{https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
-    <script th:src="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
+    <script th:src="@{/https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <script th:src="@{/https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
     <![endif]-->
 </head>
 <body>
-
-<!--================Main Header Area =================-->
 <header class="main_header_area">
     <div class="top_header_area row m0">
         <div class="container">
             <div class="float-left">
             </div>
             <div class="float-right">
-                <ul class="h_social list_style">
-                </ul>
                 <ul class="h_search list_style">
-                    <li class="shop_cart" th:if = "${session.user != null}"><a th:href="@{/cart/{id}(id=${session.user.id})}"><i class="lnr lnr-cart"></i></a></li>
+                    <li class="shop_cart">
+                        <a th:href="@{/customer/cart}">
+                            <i class="lnr lnr-cart"></i>
+                        </a>
+                    </li>
                     <li class="dropdown submenu">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a th:href="@{/}" style="color: #e3209b">Account</a></li>
-                            <li th:if = "${session.user != null}" ><a th:href="@{/home}" style="color: #e3209b">Logout</a></li>
+                            <li><a th:href="@{/logout}" style="color: #e3209b">Đăng xuất</a></li>
+                            <li><a th:href="@{/}" style="color: #e3209b">Thông tin</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -68,11 +67,13 @@
     <div class="main_menu_area">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="index.html">
-                    <img th:src="@{img/logo.png}" alt="">
-                    <img th:src="@{img/logo-2.png}" alt="">
+                <a class="navbar-brand" th:href="@{customer/home}">
+                    <img th:src="@{/img/logo.png}" alt="">
+                    <img th:src="@{/img/logo-2.png}" alt="">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
 							<span class="my_toggle_menu">
                             	<span></span>
                             	<span></span>
@@ -81,36 +82,29 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li><a href="cake.html">Home</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="menu.html">About Us</a></li>
+                        <li><a th:href="@{customer/home}">Home</a></li>
+                        <li><a th:href="@{customer/home}">Về chúng tôi</a></li>
                     </ul>
                     <ul class="navbar-nav justify-content-end">
-                        <li><a href="contact.html">Blog</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a th:href="@{customer/home}">Blog</a></li>
+                        <li><a th:href="@{customer/home}">Liên hệ</a></li>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
 </header>
-<!--================End Main Header Area =================-->
-
-<!--================End Main Header Area =================-->
 <section class="banner_area">
     <div class="container">
         <div class="banner_text">
             <h3>Shop</h3>
             <ul>
-                <li><a th:href="@{/home}">Home</a></li>
-                <li><a th:href="@{/mainshop}">Shop</a></li>
+                <li><a th:href="@{/customer/home}">Home</a></li>
+                <li><a th:href="@{/customer/home}">Shop</a></li>
             </ul>
         </div>
     </div>
 </section>
-<!--================End Main Header Area =================-->
-
-<!--================Product Area =================-->
 <section class="product_area p_100">
     <div class="container">
         <div class="row product_inner_row">
@@ -118,33 +112,35 @@
                 <div class="row m0 product_task_bar">
                     <div class="product_task_inner">
                         <div class="float-left">
-                            <a class="active" th:href="@{/#}"><i class="fa fa-th-large" aria-hidden="true"></i></a>
-                            <a th:href="@{/#}"><i class="fa fa-th-list" aria-hidden="true"></i></a>
-                            <span>Showing 1 - 10 of 55 results</span>
+                            <a class="active" th:href="@{/}"><i class="fa fa-th-large" aria-hidden="t rue"></i></a>
+                            <a th:href="@{/}"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+                            <span></span>
                         </div>
                         <div class="float-right">
                             <h4>Sort by :</h4>
                             <select class="short">
-                                <option data-display="Default">Default</option>
-                                <option value="1">Default</option>
-                                <option value="2">Default</option>
-                                <option value="4">Default</option>
+                                <option data-display="Default">Sắp xếp theo tên A_Z</option>
+                                <option value="1">Khuyến mãi</option>
+                                <option value="2">Sắp xếp theo giá: từ cao đến thấp</option>
+                                <option value="4">Sản phẩm bán chạy</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="row product_item_inner" th:each="product : ${session.listProduct}" >
-                    <div class="col-lg-4 col-md-4 col-6">
-                        <div class="cake_feature_item">
-                            <div class="cake_img">
-                                <img th:src="${product.linkImg}" alt="" th:href="@{/product/{id}(id=${product.id})}">
+                <div class="row product_item_inner">
+                    <div class="col-lg-4 col-md-4 col-6" th:each="product : ${session.listProduct}">
+                        <form th:action="@{/cart/{idProduct}(idProduct=${product.id})}" method="post">
+                            <div class="cake_feature_item">
+                                <a th:href="@{/customer/product/{id}(id=${product.id})}">
+                                    <div class="cake_img"><img th:src="${product.linkImg}" alt=""></div>
+                                </a>
+                                <div class="cake_text">
+                                    <h4 th:text="'$' + ${product.price}"></h4>
+                                    <h3 th:text="${product.name}"></h3>
+                                    <button class="pest_btn">Thêm vào giỏ hàng</button>
+                                </div>
                             </div>
-                            <div class="cake_text">
-                                <h4 th:text="'$' + ${product.price}"></h4>
-                                <h3 th:text="${product.name}"></h3>
-                                <a class="pest_btn" th:href="@{/cart/{id}(id=${product.id})}">Add to cart</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -152,7 +148,7 @@
                 <div class="product_left_sidebar">
                     <aside class="left_sidebar search_widget">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Search Keywords">
+                            <input type="text" class="form-control" placeholder="Tìm kiếm">
                             <div class="input-group-append">
                                 <button class="btn" type="button"><i class="icon icon-Search"></i></button>
                             </div>
@@ -160,14 +156,10 @@
                     </aside>
                     <aside class="left_sidebar p_catgories_widget">
                         <div class="p_w_title">
-                            <h3>Product Categories</h3>
+                            <h3>Danh mục sản phẩm</h3>
                         </div>
-                        <ul class="list_style">
-                            <li><a th:href="@{/#}">Cupcake</a></li>
-                            <li><a th:href="@{/#}">Chocolate</a></li>
-                            <li><a th:href="@{/#}">Celebration</a></li>
-                            <li><a th:href="@{/#}">Wedding Cake</a></li>
-                            <li><a th:href="@{/#}">Desserts</a></li>
+                        <ul class="list_style" th:each="category : ${session.listCategory}">
+                            <li><a th:text="${category.name}"></a></li>
                         </ul>
                     </aside>
                 </div>
@@ -175,82 +167,68 @@
         </div>
     </div>
 </section>
-<!--================End Product Area =================-->
-
-
-<!--================Footer Area =================-->
 <footer class="footer_area">
     <div class="footer_widgets">
         <div class="container">
             <div class="row footer_wd_inner">
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-3">
                     <aside class="f_widget f_about_widget">
                         <img th:src="@{/img/footer-logo.png}" alt="">
-                        <p>Delicious cake</p>
+                        <p>CAKE BAKERY</p>
                         <ul class="nav">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a th:href="@{#}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a th:href="@{#}"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a th:href="@{#}"><i class="fa fa-twitter"></i></a></li>
+                            <li><a th:href="@{#}"><i class="fa fa-google-plus"></i></a></li>
                         </ul>
                     </aside>
                 </div>
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-3">
                     <aside class="f_widget f_link_widget">
                         <div class="f_title">
-                            <h3>Quick links</h3>
                         </div>
                         <ul class="list_style">
-                            <li><a href="#">View Order</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </aside>
                 </div>
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-3">
                     <aside class="f_widget f_link_widget">
                         <div class="f_title">
-                            <h3>Work Times</h3>
+                            <h3>Thời gian làm việc</h3>
                         </div>
                         <ul class="list_style">
-                            <li><a href="#">Mon. :  Fri.: 8 am - 8 pm</a></li>
-                            <li><a href="#">Sat. :  Sun.: 8 am - 10 pm</a></li>
+                            <li><a th:href="@{#}">Mon. : Fri.: 8 am - 8 pm</a></li>
+                            <li><a th:href="@{#}">Sat. : Sun. : 8 am - 10 pm</a></li>
                         </ul>
                     </aside>
                 </div>
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-3">
                     <aside class="f_widget f_contact_widget">
                         <div class="f_title">
-                            <h3>Contact Info</h3>
+                            <h3>Liên hệ với chúng tôi</h3>
                         </div>
                         <h4>(1800) 574 9687</h4>
-                        <p>Cake Bakery<br />Tran Phu Ha Dong</p>
-                        <h5>cakebakery@contact.co.in</h5>
+                        <p>CAKE BAKERY<br/>Tran Phu Ha Dong</p>
+                        <h5>cakebakery@contact.com</h5>
                     </aside>
                 </div>
             </div>
         </div>
     </div>
-</footer>
-<!--================End Footer Area =================-->
-
-
-<!--================Search Box Area =================-->
-<div class="search_area zoom-anim-dialog mfp-hide" id="test-search">
-    <div class="search_box_inner">
-        <h3>Search</h3>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
-                    </span>
+    <div class="footer_copyright">
+        <div class="container">
+            <div class="copyright_inner">
+                <div class="float-left">
+                    <h5><a target="_blank" th:href="@{/}">CAKE BAKERY</a></h5>
+                </div>
+                <div class="float-right">
+                    <a th:href="@{/}">CAKE BAKERY</a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<!--================End Search Box Area =================-->
 
-
-
-
+</footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script th:src="@{/js/jquery-3.2.1.min.js}"></script>

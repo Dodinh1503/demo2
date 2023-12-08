@@ -49,8 +49,8 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a th:href="@{/login}" style="color: #e3209b">Login</a></li>
-                            <li><a th:href="@{/register}" style="color: #e3209b">Register</a></li>
+                            <li><a th:href="@{/login}" style="color: #e3209b">Đăng nhập</a></li>
+                            <li><a th:href="@{/register}" style="color: #e3209b">Đăng ký</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -72,10 +72,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav justify-content-end">
-                        <li><a th:href="@{/home}">Home</a></li>
-                        <li><a th:href="@{/}">About Us</a></li>
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/}">Về chúng tôi</a></li>
                         <li><a th:href="@{/}">Blog</a></li>
-                        <li><a th:href="@{/}">Contact Us</a></li>
+                        <li><a th:href="@{/}">Liên hệ</a></li>
                     </ul>
                 </div>
             </nav>
@@ -90,18 +90,18 @@
 <section class="welcome_bakery_area cake_feature_main p_100">
     <div class="container">
         <div class="main_title">
-            <h2>Featured Cakes</h2>
+            <h2>Thiên đường bánh Cake Bakery</h2>
         </div>
-        <div class="cake_feature_row row" th:each="product : ${session.listProduct}">
-            <div class="col-lg-3 col-md-4 col-6">
+        <div class="cake_feature_row row" >
+            <div class="col-lg-3 col-md-4 col-6" th:each="product : ${session.listProduct}">
                 <div class="cake_feature_item">
-                    <a class="cake_img" th:href="@{/product/{id}(id=${product.id})}">
-                        <img th:src="${product.linkImg}" alt="">
+                    <a th:href="@{/product/{id}(id=${product.id})}">
+                        <div class="cake_img"><img th:src="${product.linkImg}" alt=""></div>
                     </a>
                     <div class="cake_text">
                         <h4 class="label_sale" th:text="'$' + ${product.price}"></h4>
                         <h3 th:text="${product.name}"></h3>
-                        <a class="pest_btn" th:href="@{/login}">Add to cart</a>
+                        <a class="pest_btn" th:href="@{/login}">Thêm vào giỏ hàng</a>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
             <div class="row footer_wd_inner">
                 <div class="col-lg-3 col-6">
                     <aside class="f_widget f_about_widget">
-                        <img th:src="@{img/footer-logo.png}" alt="">
+                        <img th:src="@{/img/footer-logo.png}" alt="">
                         <p>Delicious cake</p>
                         <ul class="nav">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -129,18 +129,17 @@
                 <div class="col-lg-3 col-6">
                     <aside class="f_widget f_link_widget">
                         <div class="f_title">
-                            <h3>Quick links</h3>
+
                         </div>
                         <ul class="list_style">
-                            <li><a href="#">View Order</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+
                         </ul>
                     </aside>
                 </div>
                 <div class="col-lg-3 col-6">
                     <aside class="f_widget f_link_widget">
                         <div class="f_title">
-                            <h3>Work Times</h3>
+                            <h3>Thời gian làm việc</h3>
                         </div>
                         <ul class="list_style">
                             <li><a href="#">Mon. :  Fri.: 8 am - 8 pm</a></li>
@@ -151,11 +150,11 @@
                 <div class="col-lg-3 col-6">
                     <aside class="f_widget f_contact_widget">
                         <div class="f_title">
-                            <h3>Contact Info</h3>
+                            <h3>Liên hệ với chúng tôi</h3>
                         </div>
                         <h4>(1800) 574 9687</h4>
                         <p>Cake Bakery<br />Tran Phu Ha Dong</p>
-                        <h5>cakebakery@contact.co.in</h5>
+                        <h5>cakebakery@contact.com</h5>
                     </aside>
                 </div>
             </div>
@@ -163,19 +162,6 @@
     </div>
 </footer>
 <!--================End Footer Area =================-->
-<!--================Search Box Area =================-->
-<div class="search_area zoom-anim-dialog mfp-hide" id="test-search">
-    <div class="search_box_inner">
-        <h3>Search</h3>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
-                    </span>
-        </div>
-    </div>
-</div>
-<!--================End Search Box Area =================-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script th:src="@{js/jquery-3.2.1.min.js}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

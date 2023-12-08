@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="icon" th:href="@{/img/fav-icon.png}" type="image/x-icon" />
+  <link rel="icon" th:href="@{/img/logo.jpg}" type="image/x-icon" />
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <title>Cake - Bakery</title>
 
@@ -69,11 +69,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li><a th:href="@{/#}">Home</a></li>
-            <li><a th:href="@{/#}">Menu</a></li>
+            <li><a th:href="@{/#}">Về chúng tôi</a></li>
           </ul>
           <ul class="navbar-nav justify-content-end">
             <li class="active"><a th:href="@{/#}">Blog</a></li>
-            <li class="active"><a th:href="@{/#}">Contact Us</a></li>
+            <li class="active"><a th:href="@{/#}">Liên hệ</a></li>
           </ul>
         </div>
       </nav>
@@ -89,7 +89,7 @@
       <h3>Login</h3>
       <ul>
         <li><a th:href="@{/home}">Home</a></li>
-        <li><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/login}">Đăng nhập</a></li>
       </ul>
     </div>
   </div>
@@ -103,7 +103,7 @@
     </div>
     <div class="row">
       <div class="col-lg-7">
-        <form  class="row contact_us_form"  method="post" th:action="@{/mainshop}">
+        <form  class="row contact_us_form"  method="post" th:action="@{/login}">
           <div class="form-group col-md-6">
             <input type="text" class="form-control" id="name" name="name" placeholder="Your name">
           </div>
@@ -111,7 +111,7 @@
             <input type="password" class="form-control" id="pass" name="pass" placeholder="Pass word">
           </div>
           <div class="form-group col-md-12">
-            <button type="submit" value="submit" class="btn order_s_btn form-control">Login</button>
+            <button type="submit" value="submit" class="btn order_s_btn form-control">Đăng nhập</button>
           </div>
         </form>
       </div>
@@ -130,7 +130,7 @@
         <div class="col-lg-3 col-6">
           <aside class="f_widget f_about_widget">
             <img th:src="@{img/footer-logo.png}" alt="">
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui bland itiis praesentium voluptatum deleniti atque corrupti.</p>
+            <p>Luôn mang đến khách hàng sự tin tưởng</p>
             <ul class="nav">
               <li><a th:href="@{/#}"><i class="fa fa-facebook"></i></a></li>
               <li><a th:href="@{/#}"><i class="fa fa-linkedin"></i></a></li>
@@ -142,18 +142,17 @@
         <div class="col-lg-3 col-6">
           <aside class="f_widget f_link_widget">
             <div class="f_title">
-              <h3>Quick links</h3>
+
             </div>
             <ul class="list_style">
-              <li><a th:href="@{/#}">Your Account</a></li>
-              <li><a th:href="@{/#}">Privacy Policy</a></li>
+
             </ul>
           </aside>
         </div>
         <div class="col-lg-3 col-6">
           <aside class="f_widget f_link_widget">
             <div class="f_title">
-              <h3>Work Times</h3>
+              <h3>Thời gian làm việc</h3>
             </div>
             <ul class="list_style">
               <li><a th:href="@{/#}">Mon. :  Fri.: 8 am - 8 pm</a></li>
@@ -164,11 +163,11 @@
         <div class="col-lg-3 col-6">
           <aside class="f_widget f_contact_widget">
             <div class="f_title">
-              <h3>Contact Info</h3>
+              <h3>Liên hệ vơ chúng tôi</h3>
             </div>
             <h4>(1800) 574 9687</h4>
             <p>CAKE BAKERY<br />Tran Phu Ha Dong</p>
-            <h5>cakebakery@contact.co.in</h5>
+            <h5>cakebakery@contact.com</h5>
           </aside>
         </div>
       </div>

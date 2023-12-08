@@ -1,12 +1,10 @@
-<!DOCTYPE html>
 <html xmlns=http://www.w3.org/1999/xhtml xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" th:href="@{/img/fav-icon.png}" type="image/x-icon" />
+    <link rel="icon" th:href="@{/img/logo.jpg}" type="image/x-icon"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Cake - Bakery</title>
 
@@ -41,8 +39,6 @@
     <![endif]-->
 </head>
 <body>
-
-<!--================Main Header Area =================-->
 <header class="main_header_area">
     <div class="top_header_area row m0">
         <div class="container">
@@ -50,13 +46,18 @@
             </div>
             <div class="float-right">
                 <ul class="h_search list_style">
-                    <li class="shop_cart" th:if = "${session.user != null}"><a th:href="@{/cart}"><i class="lnr lnr-cart"></i></a></li>
+                    <li class="shop_cart">
+                        <a th:href="@{/customer/cart}">
+                            <i class="lnr lnr-cart"></i>
+                        </a>
+                    </li>
                     <li class="dropdown submenu">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-user"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a th:href="@{/}" style="color: #e3209b">Account</a></li>
-                            <li th:if = "${session.user != null}" ><a th:href="@{/home}" style="color: #e3209b">Logout</a></li>
+                            <li><a th:href="@{/}" style="color: #e3209b">Thông tin</a></li>
+                            <li><a th:href="@{/logout}" style="color: #e3209b">Đăng xuất</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -66,11 +67,13 @@
     <div class="main_menu_area">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" th:href="@{#}">
+                <a class="navbar-brand" th:href="@{customer/home}">
                     <img th:src="@{/img/logo.png}" alt="">
                     <img th:src="@{/img/logo-2.png}" alt="">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
 							<span class="my_toggle_menu">
                             	<span></span>
                             	<span></span>
@@ -79,103 +82,34 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li><a th:href="@{mainshop}">Home</a></li>
-                        <li><a th:href="@{#}">Menu</a></li>
+                        <li><a th:href="@{customer/home}">Home</a></li>
+                        <li><a th:href="@{customer/home}">Về chúng tôi</a></li>
                     </ul>
                     <ul class="navbar-nav justify-content-end">
-                        <li><a th:href="@{#}">About Us</a></li>
-                        <li><a th:href="@{#}">Contact Us</a></li>
+                        <li><a th:href="@{customer/home}">Blog</a></li>
+                        <li><a th:href="@{customer/home}">Liên hệ</a></li>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
 </header>
-<!--================End Main Header Area =================-->
-
-<!--================End Main Header Area =================-->
 <section class="banner_area">
     <div class="container">
         <div class="banner_text">
             <h3>Cart</h3>
             <ul>
-                <li><a th:href="@{#}">Home</a></li>
-                <li><a th:href="@{/cart}">Cart</a></li>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/checkout}">Thanh toán</a></li>
             </ul>
         </div>
     </div>
 </section>
-<!--================End Main Header Area =================-->
 
-<!--================Cart Table Area =================-->
-<section class="cart_table_area p_100">
-    <div class="container">
-        <div class="table-responsive" >
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Preview</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Remove</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="cart : ${session.listCart}">
-                    <td>
-                        <img th:src="${cart.product.linkImg}" alt="">
-                    </td>
-                    <td th:text="${cart.product.name}">Wheel Axel</td>
-                    <td th:text="${cart.product.price}">$25.00</td>
-                    <td>
-                        <input th:min="1" th:max="${cart.product.amountleft}" value="${quantity}" type="number" name="${cart.product.id}">
-                    </td>
-                    <td th:text="${totalProduct}">$25.00</td>
-                    <td> <a th:href="@{delete/{idProduct}(idProduct=${cart.product.id})}"/>X</td>
-                </tr>
-                <tr>
-                    <td>
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Coupon code">
-                            </div>
-                            <button type="submit" class="btn">Apply Coupon</button>
-                        </form>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <button class="pest_btn" type="submit">Update</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row cart_total_inner">
-            <div class="col-lg-7"></div>
-            <div class="col-lg-5">
-                <div class="cart_total_text">
-                    <div class="cart_head">
-                        Cart Total
-                    </div>
-                    <div class="total">
-                        <h4>Total <span th:text="${totalCart}">$25.00</span></h4>
-                    </div>
-                    <div class="cart_footer">
-                        <a class="pest_btn" th:href="@{checkout}">Proceed to Checkout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <!--================End Cart Table Area =================-->
-
-<!--================Footer Area =================-->
+<div class="main_title">
+    <h2>Dịch vụ chưa được hỗ trợ</h2>
+</div>
 <footer class="footer_area">
     <div class="footer_widgets">
         <div class="container">
@@ -195,21 +129,18 @@
                 <div class="col-lg-3">
                     <aside class="f_widget f_link_widget">
                         <div class="f_title">
-                            <h3>Quick links</h3>
                         </div>
                         <ul class="list_style">
-                            <li><a th:href="@{#}">Your Account</a></li>
-                            <li><a th:href="@{#}">Privacy Policy</a></li>
                         </ul>
                     </aside>
                 </div>
                 <div class="col-lg-3">
                     <aside class="f_widget f_link_widget">
                         <div class="f_title">
-                            <h3>Work Times</h3>
+                            <h3>Thời gian làm việc</h3>
                         </div>
                         <ul class="list_style">
-                            <li><a th:href="@{#}">Mon. :  Fri.: 8 am - 8 pm</a></li>
+                            <li><a th:href="@{#}">Mon. : Fri.: 8 am - 8 pm</a></li>
                             <li><a th:href="@{#}">Sat. : Sun. : 8 am - 10 pm</a></li>
                         </ul>
                     </aside>
@@ -217,11 +148,11 @@
                 <div class="col-lg-3">
                     <aside class="f_widget f_contact_widget">
                         <div class="f_title">
-                            <h3>Contact Info</h3>
+                            <h3>Liên hệ với chúng tôi</h3>
                         </div>
                         <h4>(1800) 574 9687</h4>
-                        <p>CAKE BAKERY<br />Tran Phu Ha Dong</p>
-                        <h5>cakebakery@contact.co.in</h5>
+                        <p>CAKE BAKERY<br/>Tran Phu Ha Dong</p>
+                        <h5>cakebakery@contact.com</h5>
                     </aside>
                 </div>
             </div>
@@ -231,35 +162,15 @@
         <div class="container">
             <div class="copyright_inner">
                 <div class="float-left">
-                    <h5><a target="_blank" th:href="@{https://www.templatespoint.net}">CAKE BAKERY</a></h5>
+                    <h5><a target="_blank">CAKE BAKERY</a></h5>
                 </div>
                 <div class="float-right">
-                    <a th:href="@{#}">Purchase Now</a>
+                    <a th:href="@{/#}">CAKE BAKERY</a>
                 </div>
             </div>
         </div>
     </div>
 </footer>
-<!--================End Footer Area =================-->
-
-
-<!--================Search Box Area =================-->
-<div class="search_area zoom-anim-dialog mfp-hide" id="test-search">
-    <div class="search_box_inner">
-        <h3>Search</h3>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
-                    </span>
-        </div>
-    </div>
-</div>
-<!--================End Search Box Area =================-->
-
-
-
-
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
@@ -287,5 +198,4 @@
 
 <script th:src="@{/js/theme.js}"></script>
 </body>
-
 </html>
