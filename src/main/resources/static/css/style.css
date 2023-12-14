@@ -535,7 +535,7 @@ i:before {
 }
 
 .top_header_area .float-right .h_search li.shop_cart a:before {
-  content: "3";
+  content: "";
   height: 18px;
   width: 18px;
   font-size: 11px;
@@ -551,7 +551,31 @@ i:before {
   right: -8px;
   top: 5px;
 }
+.shop_cart a {
+  position: relative;
+  display: inline-block;
+}
 
+.shop_cart a i {
+  position: relative;
+}
+
+.cart_badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #fff;
+  color: #242424;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 11px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 50%;
+  transform: translate(0%, 70%);
+}
 .main_menu_area {
   position: relative;
   background: #fff;

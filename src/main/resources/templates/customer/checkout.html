@@ -56,7 +56,7 @@
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-user"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a th:href="@{/}" style="color: #e3209b">Thông tin</a></li>
+                            <li><a th:href="@{/customer}" style="color: #e3209b">Thông tin</a></li>
                             <li><a th:href="@{/logout}" style="color: #e3209b">Đăng xuất</a></li>
                         </ul>
                     </li>
@@ -67,7 +67,7 @@
     <div class="main_menu_area">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" th:href="@{customer/home}">
+                <a class="navbar-brand" th:href="@{/customer}">
                     <img th:src="@{/img/logo.png}" alt="">
                     <img th:src="@{/img/logo-2.png}" alt="">
                 </a>
@@ -82,12 +82,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li><a th:href="@{customer/home}">Home</a></li>
-                        <li><a th:href="@{customer/home}">Về chúng tôi</a></li>
+                        <li><a th:href="@{/customer}">Home</a></li>
+                        <li><a th:href="@{/customer}">Về chúng tôi</a></li>
                     </ul>
                     <ul class="navbar-nav justify-content-end">
-                        <li><a th:href="@{customer/home}">Blog</a></li>
-                        <li><a th:href="@{customer/home}">Liên hệ</a></li>
+                        <li><a th:href="@{/customer}">Blog</a></li>
+                        <li><a th:href="@{/customer}">Liên hệ</a></li>
                     </ul>
                 </div>
             </nav>
@@ -99,8 +99,8 @@
         <div class="banner_text">
             <h3>Cart</h3>
             <ul>
-                <li><a th:href="@{/}">Home</a></li>
-                <li><a th:href="@{/checkout}">Thanh toán</a></li>
+                <li><a th:href="@{/customer}">Home</a></li>
+                <li><a th:href="@{/#}">Thanh toán</a></li>
             </ul>
         </div>
     </div>

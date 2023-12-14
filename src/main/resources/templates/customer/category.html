@@ -59,7 +59,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a th:href="@{/inform/customer}" style="color: #e3209b">Thông tin</a></li>
+                            <li><a th:href="@{/customer}" style="color: #e3209b">Thông tin</a></li>
                             <li><a th:href="@{/logout}" style="color: #e3209b">Đăng xuất</a></li>
                         </ul>
                     </li>
@@ -85,7 +85,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="active"><a th:href="@{/customer}">Home</a></li>
+                        <li><a th:href="@{/customer}">Home</a></li>
                         <li><a th:href="@{/customer}">Về chúng tôi</a></li>
                     </ul>
                     <ul class="navbar-nav justify-content-end">
@@ -115,7 +115,7 @@
                 <div class="row m0 product_task_bar">
                     <div class="product_task_inner">
                         <div class="float-left">
-                            <a class="active" th:href="@{/}"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                            <a class="active" th:href="@{/}"><i class="fa fa-th-large" aria-hidden="t rue"></i></a>
                             <a th:href="@{/}"><i class="fa fa-th-list" aria-hidden="true"></i></a>
                             <span></span>
                         </div>
@@ -130,8 +130,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="p_w_title">
+                    <h3 th:text="${category.name}+'('+${category.products.size()}+')'"></h3>
+                </div>
                 <div class="row product_item_inner">
-                    <div class="col-lg-4 col-md-4 col-6" th:each="product : ${session.listProduct}">
+                    <div class="col-lg-4 col-md-4 col-6" th:each="product : ${productsInCategory}">
                         <form th:action="@{/cart/{idProduct}(idProduct=${product.id})}" method="post">
                             <div class="cake_feature_item">
                                 <a th:href="@{/customer/product/{id}(id=${product.id})}">
@@ -140,7 +143,7 @@
                                 <div class="cake_text">
                                     <h4 th:text="'$' + ${product.price}"></h4>
                                     <h3 th:text="${product.name}"></h3>
-                                    <input type="hidden" th:value="1" name="quantity">
+                                    <input type = "hidden" th:value="1" name="quantity">
                                     <button class="pest_btn">Thêm vào giỏ hàng</button>
                                 </div>
                             </div>
@@ -166,8 +169,7 @@
                         </div>
                         <ul class="list_style" th:each="category : ${session.listCategory}">
                             <li>
-                                <a th:href="@{/category/{id}(id=${category.id})}"
-                                   th:text="${category.name}+'('+${category.products.size()}+')'"></a>
+                                <a th:href="@{/category/{id}(id=${category.id})}" th:text="${category.name}+'('+${category.products.size()}+')'"></a>
                             </li>
                         </ul>
                     </aside>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns=http://www.w3.org/1999/xhtml xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,16 +51,17 @@
             <div class="float-right">
                 <ul class="h_search list_style">
                     <li class="shop_cart">
-                        <a th:href="@{/customer/cart}">
-                            <i class="lnr lnr-cart"></i>
-                            <span class="cart_badge" th:text="${productCount}">0</span>
+                        <a>
+                            <i class="fa fa-bell"></i>
+                            <span class="cart_badge">0</span>
                         </a>
                     </li>
                     <li class="dropdown submenu">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a th:href="@{/inform/customer}" style="color: #e3209b">Thông tin</a></li>
+                            <li><a th:href="@{/admin}" style="color: #e3209b">Thông tin</a></li>
                             <li><a th:href="@{/logout}" style="color: #e3209b">Đăng xuất</a></li>
                         </ul>
                     </li>
@@ -70,7 +72,7 @@
     <div class="main_menu_area">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" th:href="@{/customer}">
+                <a class="navbar-brand" th:href="@{/admin}">
                     <img th:src="@{/img/logo.png}" alt="">
                     <img th:src="@{/img/logo-2.png}" alt="">
                 </a>
@@ -85,12 +87,21 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="active"><a th:href="@{/customer}">Home</a></li>
-                        <li><a th:href="@{/customer}">Về chúng tôi</a></li>
+                        <li><a th:href="@{/admin}">Home</a></li>
+                        <li class="dropdown submenu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin}"
+                               role="button" aria-haspopup="true" aria-expanded="false">Quản lý sản phẩm, danh mục sản
+                                phẩm</a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/add/product}">Thêm Sản Phẩm</a></li>
+                                <li><a th:href="@{/update/product}">Chỉnh Sửa Sản Phẩm</a></li>
+                                <li><a th:href="@{/add/category}">Thêm Danh Mục Sản Phẩm</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="navbar-nav justify-content-end">
-                        <li><a th:href="@{/customer}">Blog</a></li>
-                        <li><a th:href="@{/customer}">Liên hệ</a></li>
+                        <li><a th:href="@{/admin}">Quản lý đơn hàng</a></li>
+                        <li><a th:href="@{/admin}">Thống kê doanh thu</a></li>
                     </ul>
                 </div>
             </nav>
@@ -100,82 +111,51 @@
 <section class="banner_area">
     <div class="container">
         <div class="banner_text">
-            <h3>Shop</h3>
+            <h3>Thêm Danh Mục Sản Phẩm</h3>
             <ul>
-                <li><a th:href="@{/customer}">Home</a></li>
-                <li><a th:href="@{/customer}">Shop</a></li>
+                <li><a th:href="@{/admin}">Home</a></li>
+                <li><a th:href="@{/add/category}">Thêm Danh Mục Sản Phẩm</a></li>
             </ul>
         </div>
     </div>
 </section>
-<section class="product_area p_100">
+<!--================End Main Header Area =================-->
+
+<!--================Product Details Area =================-->
+<section class="product_details_area p_100">
     <div class="container">
-        <div class="row product_inner_row">
-            <div class="col-lg-9">
-                <div class="row m0 product_task_bar">
-                    <div class="product_task_inner">
-                        <div class="float-left">
-                            <a class="active" th:href="@{/}"><i class="fa fa-th-large" aria-hidden="true"></i></a>
-                            <a th:href="@{/}"><i class="fa fa-th-list" aria-hidden="true"></i></a>
-                            <span></span>
-                        </div>
-                        <div class="float-right">
-                            <h4>Sort by :</h4>
-                            <select class="short">
-                                <option data-display="Default">Sắp xếp theo tên A_Z</option>
-                                <option value="1">Khuyến mãi</option>
-                                <option value="2">Sắp xếp theo giá: từ cao đến thấp</option>
-                                <option value="4">Sản phẩm bán chạy</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row product_item_inner">
-                    <div class="col-lg-4 col-md-4 col-6" th:each="product : ${session.listProduct}">
-                        <form th:action="@{/cart/{idProduct}(idProduct=${product.id})}" method="post">
-                            <div class="cake_feature_item">
-                                <a th:href="@{/customer/product/{id}(id=${product.id})}">
-                                    <div class="cake_img"><img th:src="${product.linkImg}" alt=""></div>
-                                </a>
-                                <div class="cake_text">
-                                    <h4 th:text="'$' + ${product.price}"></h4>
-                                    <h3 th:text="${product.name}"></h3>
-                                    <input type="hidden" th:value="1" name="quantity">
-                                    <button class="pest_btn">Thêm vào giỏ hàng</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="product_left_sidebar">
-                    <aside class="left_sidebar search_widget">
-                        <form th:action="@{/search}" method="post">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm" name="keyword">
-                                <div class="input-group-append">
-                                    <button class="btn" type="button"><i class="icon icon-Search"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </aside>
-                    <aside class="left_sidebar p_catgories_widget">
-                        <div class="p_w_title">
-                            <h3>Danh mục sản phẩm</h3>
-                        </div>
-                        <ul class="list_style" th:each="category : ${session.listCategory}">
-                            <li>
-                                <a th:href="@{/category/{id}(id=${category.id})}"
-                                   th:text="${category.name}+'('+${category.products.size()}+')'"></a>
-                            </li>
-                        </ul>
-                    </aside>
-                </div>
-            </div>
+        <div class="main_title" th:if="${not #strings.isEmpty(successAdd)}">
+            <h5 th:text="${successAdd}"></h5>
+        </div>
+        <div class="main_title" th:if="${not #strings.isEmpty(errorAdd)}">
+            <h5 th:text="${errorAdd}"></h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Danh mục con</th>
+                    <th scope="col">Danh mục cha</th>
+                </tr>
+                </thead>
+                <tbody>
+                <form th:action="@{/add/category}" method="post">
+                    <tr>
+                        <td><input type="text" class="form-control" name="name"></td>
+                        <td><select class="form-control" name="categoryParent">
+                            <option th:each="categoryParent : ${session.listCategoryParent}" th:value="${categoryParent.id}" th:text="${categoryParent.name}"></option>
+                        </select></td>
+                    </tr>
+                    <tr colspan="7">
+                        <button class="pink_more" type="submit">Thêm danh mục sản phẩm</button>
+                    </tr>
+                </form>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
+<!--================End Product Details Area =================-->
 <footer class="footer_area">
     <div class="footer_widgets">
         <div class="container">

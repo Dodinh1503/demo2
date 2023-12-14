@@ -29,6 +29,8 @@
   <link th:href="@{/vendors/magnifc-popup/magnific-popup.css}" rel="stylesheet">
   <link th:href="@{/vendors/jquery-ui/jquery-ui.min.css}" rel="stylesheet">
   <link th:href="@{/vendors/nice-select/css/nice-select.css}" rel="stylesheet">
+  <link th:href="@{/vendors/datetime-picker/css/bootstrap-datetimepicker.min.css}" rel="stylesheet">
+  <link th:href="@{/vendors/nice-select/css/nice-select.css}" rel="stylesheet">
 
   <link th:href="@{/css/style.css}" rel="stylesheet">
   <link th:href="@{/css/responsive.css}" rel="stylesheet">
@@ -55,6 +57,7 @@
           <li class="shop_cart">
             <a th:href="@{/login}">
               <i class="lnr lnr-cart"></i>
+              <span class="cart_badge">0</span>
             </a>
           </li>
           <li class="dropdown submenu">
@@ -62,30 +65,35 @@
                aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
             <ul class="dropdown-menu">
               <li><a th:href="@{/login}" style="color: #e3209b">Đăng nhập</a></li>
-              <li><a th:href="@{/register}" style="color: #e3209b">Đăng ký</a></li>
+              <li><a th:href="@{/register}" style="color: #e3209b">Đăng ký ngay</a></li>
             </ul>
           </li>
         </ul>
       </div>
     </div>
   </div>
-  <div class="main_menu_two">
+  <div class="main_menu_area">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" th:href="@{/}"><img th:src="@{img/logo-2.png}" alt=""></a>
+        <a class="navbar-brand" th:href="@{/}">
+          <img th:src="@{/img/logo.png}" alt="">
+          <img th:src="@{/img/logo-2.png}" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="my_toggle_menu">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </span>
+							<span class="my_toggle_menu">
+                            	<span></span>
+                            	<span></span>
+                            	<span></span>
+                            </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav justify-content-end">
+          <ul class="navbar-nav mr-auto">
             <li><a th:href="@{/}">Home</a></li>
             <li><a th:href="@{/}">Về chúng tôi</a></li>
+          </ul>
+          <ul class="navbar-nav justify-content-end">
             <li><a th:href="@{/}">Blog</a></li>
             <li><a th:href="@{/}">Liên hệ</a></li>
           </ul>
@@ -112,19 +120,19 @@
 <section class="product_details_area p_100">
   <div class="container">
       <div class="row product_d_price">
-        <div class="col-lg-6">
+        <div class="col-lg-4 col-sm-6">
           <div class="product_img"><img class="img-fluid" th:src="${product.linkImg}" alt=""></div>
         </div>
         <div class="col-lg-6">
             <div class="product_details_text">
               <h4 th:text="${product.name}"></h4>
               <p th:text="${product.description}"></p>
-              <h5>Price :<span th:text="'$' + ${product.price}"></span></h5>
+              <h5>Giá :<span th:text="'$' + ${product.price}"></span></h5>
               <div class="quantity_box">
-                <label th:for="quantity">Quantity :</label>
+                <label th:for="quantity">Số lượng :</label>
                 <input th:min="1" th:max="${product.amountLeft}" value="1" type="number" name="${product.id}">
               </div>
-              <a th:href="@{/login}" class="pink_more" type="submit">Thêm va giỏ hàng</a>
+              <a th:href="@{/login}" class="pink_more" type="submit">Thêm vào giỏ hàng</a>
             </div>
         </div>
       </div>

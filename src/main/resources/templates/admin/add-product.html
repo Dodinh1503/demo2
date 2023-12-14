@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="icon" th:href="@{/img/logo.jpg}" type="image/x-icon" />
+  <link rel="icon" th:href="@{/img/logo.jpg}" type="image/x-icon"/>
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <title>Cake - Bakery</title>
 
@@ -51,9 +51,9 @@
       <div class="float-right">
         <ul class="h_search list_style">
           <li class="shop_cart">
-            <a th:href="@{/customer/cart}">
-              <i class="lnr lnr-cart"></i>
-              <span class="cart_badge" th:text="${productCount}">0</span>
+            <a>
+              <i class="fa fa-bell"></i>
+              <span class="cart_badge">0</span>
             </a>
           </li>
           <li class="dropdown submenu">
@@ -61,7 +61,7 @@
                aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-user"></i></a>
             <ul class="dropdown-menu">
-              <li><a th:href="@{/customer}" style="color: #e3209b">Thông tin</a></li>
+              <li><a th:href="@{/admin}" style="color: #e3209b">Thông tin</a></li>
               <li><a th:href="@{/logout}" style="color: #e3209b">Đăng xuất</a></li>
             </ul>
           </li>
@@ -72,7 +72,7 @@
   <div class="main_menu_area">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" th:href="@{/customer}">
+        <a class="navbar-brand" th:href="@{/admin}">
           <img th:src="@{/img/logo.png}" alt="">
           <img th:src="@{/img/logo-2.png}" alt="">
         </a>
@@ -87,12 +87,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li><a th:href="@{/customer}">Home</a></li>
-            <li><a th:href="@{/customer}">Về chúng tôi</a></li>
+            <li><a th:href="@{/admin}">Home</a></li>
+            <li class="dropdown submenu">
+              <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin}"
+                 role="button" aria-haspopup="true" aria-expanded="false">Quản lý sản phẩm, danh mục sản
+                phẩm</a>
+              <ul class="dropdown-menu">
+                <li><a th:href="@{/add/product}">Thêm Sản Phẩm</a></li>
+                <li><a th:href="@{/update/product}">Chỉnh Sửa Sản Phẩm</a></li>
+                <li><a th:href="@{/add/category}">Thêm Danh Mục Sản Phẩm</a></li>
+              </ul>
+            </li>
           </ul>
           <ul class="navbar-nav justify-content-end">
-            <li><a th:href="@{/customer}">Blog</a></li>
-            <li><a th:href="@{/customer}">Liên hệ</a></li>
+            <li><a th:href="@{/admin}">Quản lý đơn hàng</a></li>
+            <li><a th:href="@{/admin}">Thống kê doanh thu</a></li>
           </ul>
         </div>
       </nav>
@@ -102,10 +111,10 @@
 <section class="banner_area">
   <div class="container">
     <div class="banner_text">
-      <h3>Chi Tiết Sản Phẩm</h3>
+      <h3>Thêm Sản Phẩm</h3>
       <ul>
-        <li><a th:href="@{/customer}">Home</a></li>
-        <li><a th:href="@{#}">Chi Tiết Sản Phẩm</a></li>
+        <li><a th:href="@{/admin}">Home</a></li>
+        <li><a th:href="@{/add/product}">Thêm Sản Phẩm</a></li>
       </ul>
     </div>
   </div>
@@ -115,25 +124,47 @@
 <!--================Product Details Area =================-->
 <section class="product_details_area p_100">
   <div class="container">
-      <div class="row product_d_price">
-        <div class="col-lg-6">
-          <div class="product_img"><img class="img-fluid" th:src="${product.linkImg}" alt=""></div>
-        </div>
-        <div class="col-lg-6">
-          <form th:action="@{/cart/{idProduct}(idProduct=${product.id})}" method="post">
-            <div class="product_details_text">
-              <h4 th:text="${product.name}"></h4>
-              <p th:text="${product.description}"></p>
-              <h5>Giá :<span th:text="'$' + ${product.price}">$24.5</span></h5>
-              <div class="quantity_box">
-                <label th:for="quantity">Số lượng :</label>
-                <input th:min="1" th:max="${product.amountLeft}" th:value="1" type="number" name="quantity">
-              </div>
-              <button class="pink_more" type="submit">Thêm vào giỏ hàng</button>
-            </div>
-          </form>
-        </div>
-      </div>
+    <div class="main_title" th:if="${not #strings.isEmpty(successAdd)}">
+      <h5 th:text="${successAdd}"></h5>
+    </div>
+    <div class="main_title" th:if="${not #strings.isEmpty(errorAdd)}">
+      <h5 th:text="${errorAdd}"></h5>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Ảnh</th>
+          <th scope="col">Sản phẩm</th>
+          <th scope="col">Mô tả</th>
+          <th scope="col">Giá($)</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Giảm giá(%)</th>
+          <th scope="col">Danh mục sản phẩm</th>
+        </tr>
+        </thead>
+        <tbody>
+        <form th:action="@{/add/product}" method="post">
+          <tr>
+            <td>
+<!--              <input type="file" class="form-control-file" name="imageFile">-->
+            </td>
+            <td><input type="text" class="form-control" name="name"></td>
+            <td><input type="text" class="form-control" name="description"></td>
+            <td><input type="text" class="form-control" name="price" ></td>
+            <td><input type="number" class="form-control" name="quantity" th:value="${quantity}"></td>
+            <td><input type="text" class="form-control" name="discount"></td>
+            <td><select class="form-control" name="category">
+              <option th:each="category : ${session.listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select></td>
+          </tr>
+          <tr colspan="7">
+            <button class="pink_more" type="submit">Thêm sản phẩm</button>
+          </tr>
+        </form>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 <!--================End Product Details Area =================-->
@@ -167,7 +198,7 @@
               <h3>Thời gian làm việc</h3>
             </div>
             <ul class="list_style">
-              <li><a th:href="@{#}">Mon. :  Fri.: 8 am - 8 pm</a></li>
+              <li><a th:href="@{#}">Mon. : Fri.: 8 am - 8 pm</a></li>
               <li><a th:href="@{#}">Sat. : Sun. : 8 am - 10 pm</a></li>
             </ul>
           </aside>
@@ -178,7 +209,7 @@
               <h3>Liên hệ với chúng tôi</h3>
             </div>
             <h4>(1800) 574 9687</h4>
-            <p>CAKE BAKERY<br />Tran Phu Ha Dong</p>
+            <p>CAKE BAKERY<br/>Tran Phu Ha Dong</p>
             <h5>cakebakery@contact.com</h5>
           </aside>
         </div>

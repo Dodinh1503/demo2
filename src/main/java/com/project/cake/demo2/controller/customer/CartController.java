@@ -21,21 +21,16 @@ import java.util.List;
 @Controller
 public class CartController {
     @Autowired
-    private final ProductRepository productRepository;
+    private  ProductRepository productRepository;
     @Autowired
-    private final CartRepository cartRepository;
+    private  CartRepository cartRepository;
     @Autowired
-    private final UserRepository userRepository;
-
-    public CartController(ProductRepository productRepository, CartRepository cartRepository, UserRepository userRepository) {
-        this.productRepository = productRepository;
-        this.cartRepository = cartRepository;
-        this.userRepository = userRepository;
-    }
+    private  UserRepository userRepository;
 
 
     @PostMapping("/cart/{idProduct}")
-    public String addToCart(@PathVariable("idProduct") int id, HttpSession session, Model model) {
+    public String addToCart(@PathVariable("idProduct") int id,@RequestParam("quantity") int quantity, HttpSession session, Model model) {
+
         List<Product> list = (List<Product>) session.getAttribute("listProduct");
         User user = (User) session.getAttribute("user");
         Product p = new Product();
@@ -48,39 +43,41 @@ public class CartController {
         if (existingCart != null) {
             existingCart.setProduct(existingCart.getProduct());
             existingCart.setUser(user);
-            existingCart.setQuantity(existingCart.getQuantity() + 1);
-            existingCart.setTotal(existingCart.getTotal() + p.getPrice());
+            existingCart.setQuantity(existingCart.getQuantity() + quantity);
+            existingCart.setTotal(existingCart.getTotal() + p.getPrice()*quantity);
             cartRepository.save(existingCart);
         } else {
             Cart cart = new Cart();
             cart.setProduct(p);
             cart.setUser(user);
-            cart.setQuantity(1);
-            cart.setTotal(p.getPrice());
+            cart.setQuantity(quantity);
+            cart.setTotal(p.getPrice()*quantity);
             cartRepository.save(cart);
 
         }
 
         float totalPrice = 0;
-        session.setAttribute("totalPrice", totalPrice);
+        int productCount = 0;
+        //lay list cart moi va luu cart vao session
+        List<Cart> listCart = cartRepository.findByUser(user);
+        session.setAttribute("listCartByUser", listCart);
 
-        //luu cart vao session
-        List<Cart> listCart = cartRepository.findAll();
-        session.setAttribute("listCart", listCart);
         for (Cart i : listCart) {
             totalPrice += i.getTotal();
+            productCount+=i.getQuantity();
         }
         model.addAttribute("totalPrice", totalPrice);
-        System.out.println(totalPrice);
+        model.addAttribute("productCount", productCount);
+
         return "customer/cart";
     }
 
-    @GetMapping("/delete/{idCart}")
+    @GetMapping("/delete/cart/{idCart}")
     public String delete(@PathVariable("idCart") int id, HttpSession session, Model model) {
         float totalPrice = 0;
-        session.setAttribute("totalPrice", totalPrice);
+        int productCount = 0;
         //lay list cart roi xoa theo id, sau do cap nhat lai session
-        List<Cart> listCart = (List<Cart>) session.getAttribute("listCart");
+        List<Cart> listCart = (List<Cart>) session.getAttribute("listCartByUser");
         for (Cart i : listCart) {
             if (i.getId() == id) {
                 cartRepository.deleteById(id);
@@ -89,24 +86,30 @@ public class CartController {
             }
         }
         session.setAttribute("listCart", listCart);
+
         for (Cart i : listCart) {
             totalPrice += i.getTotal();
+            productCount+=i.getQuantity();
         }
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("productCount", productCount);
+
         return "customer/cart";
     }
 
     @GetMapping("/customer/cart")
     public String moveToCart(HttpSession session, Model model) {
         float totalPrice = 0;
-        session.setAttribute("totalPrice", totalPrice);
-        User user = (User) session.getAttribute("user");
-        List<Cart> listCart = cartRepository.findAll();
-        session.setAttribute("listCart", listCart);
+        int productCount = 0;
+        List<Cart> listCart = (List<Cart>) session.getAttribute("listCartByUser");
+
         for (Cart i : listCart) {
             totalPrice += i.getTotal();
+            productCount+=i.getQuantity();
         }
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("productCount", productCount);
+
         return "customer/cart";
     }
 
@@ -131,14 +134,18 @@ public class CartController {
             }
         }
         float totalPrice = 0;
-        session.setAttribute("totalPrice", totalPrice);
-        //luu cart vao session
-        List<Cart> listCart = cartRepository.findAll();
-        session.setAttribute("listCart", listCart);
+        int productCount = 0;
+        //lay list cart moi va luu cart vao session
+        List<Cart> listCart = cartRepository.findByUser(user);
+        session.setAttribute("listCartByUser", listCart);
+
         for (Cart i : listCart) {
             totalPrice += i.getTotal();
+            productCount+=i.getQuantity();
         }
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("productCount", productCount);
+
         return "customer/cart";
     }
 

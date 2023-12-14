@@ -86,10 +86,10 @@
 <section class="banner_area">
   <div class="container">
     <div class="banner_text">
-      <h3>Login</h3>
+      <h3>Register</h3>
       <ul>
         <li><a th:href="@{/home}">Home</a></li>
-        <li><a th:href="@{/login}">Đăng nhập</a></li>
+        <li><a th:href="@{/login}">Đăng ký</a></li>
       </ul>
     </div>
   </div>
@@ -99,23 +99,31 @@
 <!--================Contact Form Area =================-->
 <section class="contact_form_area p_100">
   <div class="container">
-    <div class="main_title">
+    <div class="main_title" th:if="${not #strings.isEmpty(error)}">
+      <h5 th:text="${error}"></h5>
     </div>
     <div class="row">
       <div class="col-lg-7">
-        <form  class="row contact_us_form"  method="post" th:action="@{/login}">
+        <form  class="row contact_us_form"  method="post" th:action="@{/register}">
           <div class="form-group col-md-6">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Your name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Nick name">
           </div>
           <div class="form-group col-md-6">
             <input type="password" class="form-control" id="pass" name="pass" placeholder="Pass word">
           </div>
           <div class="form-group col-md-12">
-            <button type="submit" value="submit" class="btn order_s_btn form-control">Đăng nhập</button>
+            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full name">
+          </div>
+          <div class="form-group col-md-12">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email address">
+          </div>
+          <div class="form-group col-md-12">
+            <button type="submit" value="submit" class="btn order_s_btn form-control">Đăng ký</button>
           </div>
         </form>
       </div>
     </div>
+
   </div>
 </section>
 <!--================End Contact Form Area =================-->
@@ -188,37 +196,6 @@
 </footer>
 <!--================End Footer Area =================-->
 
-<!--================Contact Success and Error message Area =================-->
-<div id="success" class="modal modal-message fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="fa fa-close"></i>
-        </button>
-        <h2>Thank you</h2>
-        <p>Your message is successfully sent...</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modals error -->
-
-<div id="error" class="modal modal-message fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="fa fa-close"></i>
-        </button>
-        <h2>Sorry !</h2>
-        <p> Something went wrong </p>
-      </div>
-    </div>
-  </div>
-</div>
-<!--================End Contact Success and Error message Area =================-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script th:src="@{js/jquery-3.2.1.min.js}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

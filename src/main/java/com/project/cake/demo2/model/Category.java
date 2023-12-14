@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor(force = true)
@@ -16,6 +18,9 @@ public class Category {
     private int id;
     private String name;
     private int status;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 
     @ManyToOne(targetEntity = CategoryParent.class)
     @JoinColumn(name = "parent_Id", referencedColumnName = "id")
